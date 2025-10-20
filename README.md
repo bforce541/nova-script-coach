@@ -1,0 +1,2 @@
+# nova-script
+NovaScript Project 
