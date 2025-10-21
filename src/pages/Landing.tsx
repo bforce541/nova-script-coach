@@ -1,11 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-
 const Landing = () => {
   const navigate = useNavigate();
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative px-4 pt-32 pb-24 sm:px-6 lg:px-8 sm:pt-40">
         <div className="mx-auto max-w-4xl text-center">
@@ -15,14 +12,8 @@ const Landing = () => {
           <p className="text-xl sm:text-2xl mb-4 text-muted-foreground font-light">
             Refine your message. Perfect your ads.
           </p>
-          <p className="text-base sm:text-lg mb-12 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            NovaScript analyzes your social media captions and ads using AI — giving you clear, 
-            actionable feedback to make your words more effective.
-          </p>
-          <Button 
-            onClick={() => navigate('/dashboard')}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg transition-all duration-200"
-          >
+          <p className="text-base sm:text-lg mb-12 text-muted-foreground max-w-2xl mx-auto leading-relaxed">NovaScript analyzes your social media captions and ads using AI, giving you clear, actionable feedback to make your words more effective.</p>
+          <Button onClick={() => navigate('/dashboard')} className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg transition-all duration-200">
             Get Started
           </Button>
         </div>
@@ -40,9 +31,7 @@ const Landing = () => {
                 <span className="font-heading text-2xl text-primary">1</span>
               </div>
               <h3 className="font-heading text-xl mb-3 text-foreground">Paste</h3>
-              <p className="text-muted-foreground">
-                Add your ad caption or upload an image of your ad
-              </p>
+              <p className="text-muted-foreground">Type your ad caption or upload an image of your ad</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 rounded-full bg-accent mx-auto mb-6 flex items-center justify-center">
@@ -101,8 +90,6 @@ const Landing = () => {
           © NovaScript 2025 • Built by Team Nova • Privacy • Terms
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Landing;
