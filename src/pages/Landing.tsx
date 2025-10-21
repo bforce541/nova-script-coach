@@ -4,7 +4,7 @@ const Landing = () => {
   const navigate = useNavigate();
   return <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative px-4 pt-32 pb-24 sm:px-6 lg:px-8 sm:pt-40">
+      <section className="relative px-4 pt-32 pb-24 sm:px-6 lg:px-8 sm:pt-40 bg-[linear-gradient(135deg,hsl(var(--background)),hsl(var(--card)),hsl(var(--surface-elevated)))]">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl mb-6 text-foreground">
             NovaScript
