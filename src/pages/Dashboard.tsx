@@ -116,7 +116,12 @@ const Dashboard = () => {
       <header className="border-b border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="font-heading text-2xl text-foreground">NovaScript</h1>
+            <button 
+              onClick={() => navigate("/")}
+              className="font-heading text-2xl text-foreground hover:text-primary transition-colors"
+            >
+              NovaScript
+            </button>
             <nav className="flex items-center gap-6">
               <Button variant="ghost" onClick={() => navigate("/dashboard")}>
                 Analyze
