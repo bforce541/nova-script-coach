@@ -6,6 +6,7 @@ It generates ad captions + images, and can grade them + your own, based on clari
 
 ---
 
+
 ## Features
 - Generate ad captions and hashtags from a short product description  
 - Create matching AI-generated images  
