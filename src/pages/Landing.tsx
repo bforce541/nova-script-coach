@@ -2,16 +2,28 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
-import { Sparkles, Wand2, BarChart3, Copy, CheckCircle2, TrendingUp, Zap, ArrowRight, Coffee, Dumbbell, Watch, Heart, Share2, MessageCircle } from "lucide-react";
+import { Sparkles, Wand2, BarChart3, Copy, CheckCircle2, TrendingUp, Zap, ArrowRight, Heart, Share2, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const exampleAds = [
   {
-    original: "Check out our new coffee. It's really good.",
-    improved: "☕ Your morning just got an upgrade. Our single-origin beans are roasted to perfection, delivering that rich, bold flavor you crave. Limited stock—order now and transform your daily routine.",
-    score: 85,
+    // Coffee
+    beforeHeadline: "Check out our new coffee. It's really good.",
+    beforeSubtext: "We sell coffee beans.",
+    beforeBody: "Fresh coffee. Different flavors. Buy some today.",
+    beforeCTA: "Learn more",
+    beforeScore: 10,
+    beforeLikes: 8,
+    afterHeadlinePill: "Your morning just got an upgrade.",
+    afterSubHeadline: "Premium Coffee Blend",
+    afterBody: "Our single-origin beans are roasted to perfection, delivering the rich, bold flavor you crave.",
+    afterCTA: "Order Now →",
+    afterScore: 85,
+    afterLikes: '1.1K',
+    afterDelta: '+1,082',
     tone: "Professional",
-    icon: Coffee,
+    beforeImageSrc: '/ads/coffee-before.svg',
+    afterImageSrc: '/ads/coffee-after.svg',
     color: "from-amber-500/20 to-orange-500/20",
     bgColor: "bg-gradient-to-br from-amber-50 to-orange-50",
     accentColor: "text-amber-600",
@@ -21,11 +33,23 @@ const exampleAds = [
     mood: "Warm & Inviting"
   },
   {
-    original: "Buy our fitness app. It has workouts.",
-    improved: "🔥 STOP making excuses. START making progress. Our AI-powered fitness app adapts to YOU. 50K+ users are already crushing their goals. Your transformation starts with one tap. Let's go! 💪",
-    score: 92,
+    // Fitness
+    beforeHeadline: "Buy our fitness app. It has workouts.",
+    beforeSubtext: "We have some exercises you can do.",
+    beforeBody: "Download the app and start doing workouts when you want.",
+    beforeCTA: "Try it maybe",
+    beforeScore: 12,
+    beforeLikes: 20,
+    afterHeadlinePill: "STOP making excuses. START making progress.",
+    afterSubHeadline: "AI Fitness Coach",
+    afterBody: "Our AI-powered fitness app adapts with personalized plans and real-time feedback.",
+    afterCTA: "Start Free Trial →",
+    afterScore: 92,
+    afterLikes: '1.5K',
+    afterDelta: '+1,480',
     tone: "Playful",
-    icon: Dumbbell,
+    beforeImageSrc: '/ads/fitness-before.jpg',
+    afterImageSrc: '/ads/fitness-after.svg',
     color: "from-blue-500/20 to-purple-500/20",
     bgColor: "bg-gradient-to-br from-blue-50 to-purple-50",
     accentColor: "text-blue-600",
@@ -35,11 +59,23 @@ const exampleAds = [
     mood: "Energetic & Motivational"
   },
   {
-    original: "Luxury watch sale. Limited time.",
-    improved: "✨ Crafted for those who appreciate timeless elegance. Each timepiece is a masterpiece of precision and sophistication. Join an exclusive circle of connoisseurs. Reserve yours today.",
-    score: 88,
+    // Watch
+    beforeHeadline: "Luxury watch sale. Limited time.",
+    beforeSubtext: "We have watches you can buy.",
+    beforeBody: "Different colors and straps available. Buy now before it's gone.",
+    beforeCTA: "Shop watches",
+    beforeScore: 12,
+    beforeLikes: 12,
+    afterHeadlinePill: "Crafted for timeless elegance.",
+    afterSubHeadline: "Heritage Collection",
+    afterBody: "Each timepiece is hand-assembled with sapphire crystal and Swiss movement. Reserve yours today.",
+    afterCTA: "Reserve Now →",
+    afterScore: 92,
+    afterLikes: 980,
+    afterDelta: '+968',
     tone: "Luxury",
-    icon: Watch,
+    beforeImageSrc: '/ads/watch-before.svg',
+    afterImageSrc: '/ads/watch-after.svg',
     color: "from-rose-500/20 to-pink-500/20",
     bgColor: "bg-gradient-to-br from-rose-50 to-pink-50",
     accentColor: "text-rose-600",
@@ -71,7 +107,7 @@ const Landing = () => {
         {/* Enhanced background with better contrast */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary/10" />
         <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-        
+    beforeImageSrc: '/ads/before-fitness.jpg',
         <div className="relative mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/90 backdrop-blur-sm border border-border/50 mb-8 shadow-sm">
@@ -141,20 +177,12 @@ const Landing = () => {
                     <div className="w-1 h-1 rounded-full bg-gray-400" />
                   </div>
                   
-                  {/* Product Image Area */}
-                  <div className={`relative h-64 ${exampleAds[activeExample].bgColor} flex items-center justify-center`}>
+                  {/* Product Image Area (Before) */}
+                  <div className={`relative h-64 ${exampleAds[activeExample].bgColor} flex items-center justify-center overflow-hidden`}> 
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-200/50 to-gray-300/50" />
-                    {(() => {
-                      const Icon = exampleAds[activeExample].icon;
-                      return (
-                        <div className="relative z-10 flex flex-col items-center gap-3">
-                          <div className="w-20 h-20 rounded-2xl bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                            <Icon className={`w-10 h-10 ${exampleAds[activeExample].accentColor}`} />
-                          </div>
-                          <div className="h-3 w-24 bg-gray-300 rounded" />
-                        </div>
-                      );
-                    })()}
+                    <div className="relative z-10 w-full h-full">
+                      <img src={exampleAds[activeExample].beforeImageSrc} alt={`${exampleAds[activeExample].productName} before`} className="w-full h-full object-cover" />
+                    </div>
                   </div>
                   
                   {/* Caption Area */}
@@ -163,21 +191,27 @@ const Landing = () => {
                       <Heart className="w-5 h-5 text-gray-400" />
                       <MessageCircle className="w-5 h-5 text-gray-400" />
                       <Share2 className="w-5 h-5 text-gray-400" />
+                      <div className="flex-1" />
+                      <div className="flex items-baseline gap-1">
+                        <span className="font-heading text-lg font-bold text-red-600">{exampleAds[activeExample].beforeScore}</span>
+                        <span className="text-xs text-gray-400">/100</span>
+                      </div>
                     </div>
                     <div className="space-y-2 mb-2">
-                      <div className="h-3 w-20 bg-gray-300 rounded mb-1" />
+                      <div className="text-sm font-bold text-foreground">{exampleAds[activeExample].beforeHeadline}</div>
+                      <div className="text-xs text-muted-foreground">{exampleAds[activeExample].beforeSubtext}</div>
                       <p className="text-sm text-gray-500 italic leading-relaxed">
-                        "{exampleAds[activeExample].original}"
+                        "{exampleAds[activeExample].beforeBody}"
                       </p>
                     </div>
-                    <div className="text-xs text-gray-400 mt-3">View all 12 comments</div>
+                    <div className="text-xs text-gray-400 mt-3">{exampleAds[activeExample].beforeCTA}</div>
                   </div>
                   
                   {/* Low Engagement Badge */}
                   <div className="px-4 py-2 bg-red-50 border-t border-red-100">
                     <div className="flex items-center gap-2 text-xs">
                       <TrendingUp className="w-3 h-3 text-red-500" />
-                      <span className="text-red-600 font-semibold">Low Engagement • 12 likes</span>
+                      <span className="text-red-600 font-semibold">Low Engagement • {exampleAds[activeExample].beforeLikes} likes • {exampleAds[activeExample].beforeScore}/100</span>
                     </div>
                   </div>
                 </Card>
@@ -198,11 +232,8 @@ const Landing = () => {
                   {/* Instagram Header */}
                   <div className="p-3 bg-white border-b border-primary/20 flex items-center justify-between relative z-10">
                     <div className="flex items-center gap-3">
-                      <div className={`w-8 h-8 rounded-full ${exampleAds[activeExample].bgColor} ring-2 ring-primary/30 flex items-center justify-center shadow-md`}>
-                        {(() => {
-                          const Icon = exampleAds[activeExample].icon;
-                          return <Icon className={`w-4 h-4 ${exampleAds[activeExample].accentColor}`} />;
-                        })()}
+                      <div className={`w-8 h-8 rounded-full overflow-hidden ${exampleAds[activeExample].bgColor} ring-2 ring-primary/30 flex items-center justify-center shadow-md`}>
+                        <img src={exampleAds[activeExample].afterImageSrc} alt={`${exampleAds[activeExample].brandName} logo`} className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <div className={`text-xs ${exampleAds[activeExample].accentColor} font-bold mb-0.5`}>
@@ -222,93 +253,20 @@ const Landing = () => {
                         {exampleAds[activeExample].tone}
                       </span>
                     </div>
-                    {activeExample === 0 ? (
-                      // Coffee Ad - Visual Design
-                      <div className="relative z-10 h-full flex items-center justify-center p-6">
-                        {/* Coffee Cup Visual */}
-                        <div className="relative">
-                          {/* Coffee Cup */}
-                          <div className="w-32 h-32 relative">
-                            {/* Cup Body */}
-                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-20 bg-gradient-to-b from-amber-800 via-amber-700 to-amber-900 rounded-b-2xl shadow-2xl">
-                              {/* Coffee Surface */}
-                              <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-b from-amber-950 to-amber-800 rounded-t-2xl" />
-                              {/* Steam */}
-                              <div className="absolute -top-8 left-1/2 -translate-x-1/2 flex gap-2">
-                                <div className="w-1 h-8 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '0s' }} />
-                                <div className="w-1 h-10 bg-white/50 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
-                                <div className="w-1 h-8 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
-                              </div>
-                            </div>
-                            {/* Cup Handle */}
-                            <div className="absolute bottom-8 right-0 w-8 h-12 border-4 border-amber-800 rounded-r-full" />
+                    {/* After image (full-width high-quality) */}
+                    <div className="relative z-10 h-full w-full">
+                      <img src={exampleAds[activeExample].afterImageSrc} alt={`${exampleAds[activeExample].productName} after`} className="w-full h-full object-cover" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-xl">
+                          <div className={`text-sm ${exampleAds[activeExample].accentColor} font-bold mb-1`}>
+                            {activeExample === 0 ? 'Your morning just got an upgrade.' : activeExample === 1 ? 'STOP making excuses. START making progress.' : 'Crafted for timeless elegance.'}
                           </div>
-                          {/* Coffee Beans Decoration */}
-                          <div className="absolute -top-4 -left-4 w-6 h-8 bg-amber-900 rounded-full rotate-12 opacity-60" />
-                          <div className="absolute -bottom-2 -right-6 w-5 h-7 bg-amber-800 rounded-full -rotate-12 opacity-60" />
-                          <div className="absolute top-8 -right-8 w-4 h-6 bg-amber-900 rounded-full rotate-45 opacity-50" />
-                        </div>
-                        {/* Headline Overlay */}
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-xl">
-                            <div className={`text-sm ${exampleAds[activeExample].accentColor} font-bold mb-1`}>
-                              Your morning just got an upgrade.
-                            </div>
-                            <div className="text-xs text-gray-600">
-                              {exampleAds[activeExample].productName}
-                            </div>
+                          <div className="text-xs text-gray-600">
+                            {exampleAds[activeExample].productName}
                           </div>
                         </div>
                       </div>
-                    ) : activeExample === 1 ? (
-                      // Fitness App - Visual Design
-                      <div className="relative z-10 h-full flex items-center justify-center p-6">
-                        <div className="relative">
-                          <div className={`w-28 h-28 rounded-3xl ${exampleAds[activeExample].bgColor} flex items-center justify-center border-4 border-white shadow-2xl`}>
-                            <Dumbbell className={`w-14 h-14 ${exampleAds[activeExample].accentColor}`} />
-                          </div>
-                          {/* Energy Lines */}
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="absolute w-32 h-32 border-2 border-blue-400/30 rounded-full animate-ping" />
-                            <div className="absolute w-36 h-36 border border-purple-400/20 rounded-full animate-pulse" />
-                          </div>
-                        </div>
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-xl">
-                            <div className={`text-sm ${exampleAds[activeExample].accentColor} font-bold mb-1`}>
-                              STOP making excuses. START making progress.
-                            </div>
-                            <div className="text-xs text-gray-600">
-                              {exampleAds[activeExample].productName}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      // Luxury Watch - Visual Design
-                      <div className="relative z-10 h-full flex items-center justify-center p-6">
-                        <div className="relative">
-                          <div className={`w-28 h-28 rounded-full ${exampleAds[activeExample].bgColor} flex items-center justify-center border-4 border-white shadow-2xl`}>
-                            <Watch className={`w-14 h-14 ${exampleAds[activeExample].accentColor}`} />
-                          </div>
-                          {/* Elegant Lines */}
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="absolute w-32 h-32 border border-rose-300/30 rounded-full" />
-                            <div className="absolute w-36 h-36 border border-pink-300/20 rounded-full" />
-                          </div>
-                        </div>
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-xl">
-                            <div className={`text-sm ${exampleAds[activeExample].accentColor} font-bold mb-1`}>
-                              Crafted for timeless elegance.
-                            </div>
-                            <div className="text-xs text-gray-600">
-                              {exampleAds[activeExample].productName}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                    </div>
                   </div>
                   
                   {/* Enhanced Caption Area */}
@@ -320,7 +278,7 @@ const Landing = () => {
                       <div className="flex-1" />
                       <div className="flex items-baseline gap-1">
                         <span className={`font-heading text-lg font-bold ${exampleAds[activeExample].accentColor}`}>
-                          {exampleAds[activeExample].score}
+                          {exampleAds[activeExample].afterScore}
                         </span>
                         <span className="text-xs text-gray-400">/100</span>
                       </div>
@@ -329,34 +287,17 @@ const Landing = () => {
                       <div className={`text-xs ${exampleAds[activeExample].accentColor} font-bold uppercase tracking-wide`}>
                         {exampleAds[activeExample].brandName}
                       </div>
-                      {activeExample === 0 ? (
-                        <>
-                          <p className="text-sm text-gray-800 leading-relaxed font-semibold mb-1">
-                            Your morning just got an upgrade.
-                          </p>
-                          <p className="text-sm text-gray-700 leading-relaxed">
-                            Our single-origin beans are roasted to perfection, delivering that rich, bold flavor you crave. Limited stock—order now and transform your daily routine.
-                          </p>
-                        </>
-                      ) : (
-                        <p className="text-sm text-gray-800 leading-relaxed font-medium">
-                          {exampleAds[activeExample].improved}
+                      <>
+                        <p className="text-sm text-gray-800 leading-relaxed font-semibold mb-1">
+                          {exampleAds[activeExample].afterHeadlinePill}
                         </p>
-                      )}
+                        <p className="text-sm text-gray-700 leading-relaxed">
+                          {exampleAds[activeExample].afterBody}
+                        </p>
+                      </>
                       <div className="flex items-center gap-2 mt-2 flex-wrap">
-                        {activeExample === 0 ? (
-                          <>
-                            <span className="text-[10px] text-gray-500 font-medium">#professional</span>
-                            <span className="text-[10px] text-gray-500 font-medium">#warminviting</span>
-                            <span className="text-[10px] text-gray-500 font-medium">#coffee</span>
-                            <span className="text-[10px] text-gray-500 font-medium">#artisanroasters</span>
-                          </>
-                        ) : (
-                          <>
-                            <span className="text-[10px] text-gray-400">#{exampleAds[activeExample].tone.toLowerCase()}</span>
-                            <span className="text-[10px] text-gray-400">#{exampleAds[activeExample].mood.toLowerCase().replace(' & ', '').replace(' ', '')}</span>
-                          </>
-                        )}
+                        <span className="text-[10px] text-gray-400">#{exampleAds[activeExample].tone.toLowerCase()}</span>
+                        <span className="text-[10px] text-gray-400">#{exampleAds[activeExample].mood.toLowerCase().replace(' & ', '').replace(' ', '')}</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 mt-4">
@@ -373,11 +314,11 @@ const Landing = () => {
                     <div className="flex items-center justify-between text-xs">
                       <div className="flex items-center gap-2">
                         <Zap className="w-3.5 h-3.5 text-green-600" />
-                        <span className="text-green-700 font-bold">High Engagement • 1.2K likes</span>
+                        <span className="text-green-700 font-bold">High Engagement • {exampleAds[activeExample].afterLikes} likes</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <TrendingUp className="w-3.5 h-3.5 text-green-600" />
-                        <span className="text-green-600 font-semibold">+1,188</span>
+                        <span className="text-green-600 font-semibold">{exampleAds[activeExample].afterDelta}</span>
                       </div>
                     </div>
                   </div>
@@ -388,7 +329,6 @@ const Landing = () => {
             {/* Example Selector with Labels */}
             <div className="flex items-center justify-center gap-4 mb-8">
               {exampleAds.map((ad, index) => {
-                const Icon = ad.icon;
                 return (
                   <button
                     key={index}
@@ -400,7 +340,7 @@ const Landing = () => {
                     }`}
                     aria-label={`View ${ad.tone} example`}
                   >
-                    <Icon className={`w-4 h-4 ${activeExample === index ? ad.accentColor : 'text-muted-foreground'}`} />
+                    <img src={ad.afterImageSrc} className={`w-4 h-4 rounded object-cover ${activeExample === index ? '' : 'opacity-70'}`} alt={`${ad.tone} thumbnail`} />
                     <span className={`text-sm font-medium ${activeExample === index ? 'text-foreground' : 'text-muted-foreground'}`}>
                       {ad.tone}
                     </span>

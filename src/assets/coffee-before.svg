@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <rect width="100%" height="100%" fill="#f8fafc" />
+  <rect x="48" y="64" width="144" height="96" rx="8" fill="#f3f4f6" stroke="#e5e7eb"/>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#9ca3af" font-size="13">Basic Coffee</text>
+  <text x="50%" y="67%" dominant-baseline="middle" text-anchor="middle" fill="#9ca3af" font-size="11">stock mug</text>
+</svg>
