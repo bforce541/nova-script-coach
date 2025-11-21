@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="100%" height="100%" fill="#f1f5f9" />
+  <rect x="360" y="160" width="480" height="355" rx="10" fill="#eef2f7" stroke="#e2e8f0"/>
+  <text x="600" y="360" text-anchor="middle" fill="#9aa7b2" font-size="36">Gym Graphic</text>
+  <text x="600" y="410" text-anchor="middle" fill="#9aa7b2" font-size="20">low-effort</text>
+</svg>

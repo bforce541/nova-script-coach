@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { LogOut } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import Navigation from "@/components/Navigation";
 import type { User } from "@supabase/supabase-js";
 
 interface Analysis {
@@ -55,11 +55,6 @@ const History = () => {
     }
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
-  };
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       month: 'short',
@@ -72,34 +67,12 @@ const History = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="font-heading text-2xl text-foreground">NovaScript</h1>
-            <nav className="flex items-center gap-6">
-              <Button variant="ghost" onClick={() => navigate("/dashboard")}>
-                Analyze
-              </Button>
-              <Button variant="ghost" onClick={() => navigate("/history")}>
-                History
-              </Button>
-              {user && (
-                <Button variant="ghost" onClick={handleSignOut}>
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Sign Out
-                </Button>
-              )}
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Navigation />
 
-      {/* Main Content */}
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <h2 className="font-heading text-3xl mb-2 text-foreground">Analysis History</h2>
-          <p className="text-muted-foreground">
+          <h1 className="font-heading text-4xl sm:text-5xl mb-4 text-foreground">Analysis History</h1>
+          <p className="text-lg text-muted-foreground">
             View your past ad caption analyses
           </p>
         </div>
@@ -122,28 +95,38 @@ const History = () => {
           </Card>
         ) : (
           <div className="space-y-4">
-            {analyses.map((analysis) => (
-              <Card key={analysis.id} className="p-6 bg-card border-border hover:border-primary/50 transition-colors cursor-pointer">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-foreground mb-2 line-clamp-2">
-                      {analysis.caption}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <span className="capitalize">{analysis.tone}</span>
-                      <span>•</span>
-                      <span>{formatDate(analysis.created_at)}</span>
+            {analyses.map((analysis) => {
+              const getScoreColor = (score: number) => {
+                if (score >= 80) return "text-green-600";
+                if (score >= 60) return "text-yellow-600";
+                return "text-red-600";
+              };
+              
+              return (
+                <Card key={analysis.id} className="p-6 bg-card border-border hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-foreground mb-3 line-clamp-2 leading-relaxed">
+                        {analysis.caption}
+                      </p>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <span className="capitalize px-2 py-1 rounded bg-secondary/10 text-secondary">
+                          {analysis.tone}
+                        </span>
+                        <span>•</span>
+                        <span>{formatDate(analysis.created_at)}</span>
+                      </div>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <div className={`font-heading text-4xl ${getScoreColor(analysis.score)}`}>
+                        {analysis.score}
+                      </div>
+                      <div className="text-xs text-muted-foreground mt-1">Score</div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="font-heading text-3xl text-primary">
-                      {analysis.score}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Score</div>
-                  </div>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              );
+            })}
           </div>
         )}
       </main>
