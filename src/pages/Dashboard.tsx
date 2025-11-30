@@ -9,7 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Progress } from "@/components/ui/progress";
-import { Copy, LogOut } from "lucide-react";
+import { Copy, BarChart3, Sparkles } from "lucide-react";
+import Navigation from "@/components/Navigation";
 import type { User } from "@supabase/supabase-js";
 
 const Dashboard = () => {
@@ -97,11 +98,6 @@ const Dashboard = () => {
     }
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
-  };
-
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     toast({
@@ -110,155 +106,191 @@ const Dashboard = () => {
     });
   };
 
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return "text-green-600";
+    if (score >= 60) return "text-yellow-600";
+    return "text-red-600";
+  };
+
+  const getScoreBgColor = (score: number) => {
+    if (score >= 80) return "bg-green-500";
+    if (score >= 60) return "bg-yellow-500";
+    return "bg-red-500";
+  };
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <button 
-              onClick={() => navigate("/")}
-              className="font-heading text-2xl text-foreground hover:text-primary transition-colors"
-            >
-              NovaScript
-            </button>
-            <nav className="flex items-center gap-6">
-              <Button variant="ghost" onClick={() => navigate("/dashboard")}>
-                Analyze
-              </Button>
-              {user && (
-                <Button variant="ghost" onClick={() => navigate("/history")}>
-                  History
-                </Button>
-              )}
-              {user ? (
-                <Button variant="ghost" onClick={handleSignOut}>
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Sign Out
-                </Button>
-              ) : (
-                <Button variant="ghost" onClick={() => navigate("/auth")}>
-                  Sign In
-                </Button>
-              )}
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Navigation />
 
-      {/* Main Content */}
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8">
-          <h2 className="font-heading text-3xl mb-2 text-foreground">
-            Your AI Ad Coach is ready.
-          </h2>
-          <p className="text-muted-foreground">
-            Analyze your ad captions for effectiveness and get actionable feedback.
+        <div className="mb-8 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border mb-4">
+            <BarChart3 className="w-4 h-4 text-primary" />
+            <span className="text-sm text-muted-foreground">AI Ad Analyzer</span>
+          </div>
+          <h1 className="font-heading text-4xl sm:text-5xl mb-4 text-foreground">
+            Analyze Your Ad
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Paste your ad text and get instant AI-powered feedback on effectiveness, clarity, and engagement.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Input Section */}
           <div className="space-y-6">
-            <Tabs defaultValue="text" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="text">Text Caption</TabsTrigger>
-                <TabsTrigger value="image" disabled>Image Upload</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="text" className="mt-6 space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="caption">Ad Caption</Label>
-                  <Textarea
-                    id="caption"
-                    placeholder="Paste your ad caption here..."
-                    value={caption}
-                    onChange={(e) => setCaption(e.target.value)}
-                    className="min-h-[200px] bg-background border-input resize-none"
-                  />
-                </div>
+            <Card className="p-6 bg-card border-border">
+              <Tabs defaultValue="text" className="w-full">
+                <TabsList className="grid w-full grid-cols-2 mb-6">
+                  <TabsTrigger value="text">Text Caption</TabsTrigger>
+                  <TabsTrigger value="image" disabled>Image Upload</TabsTrigger>
+                </TabsList>
                 
-                <div className="space-y-2">
-                  <Label htmlFor="tone">Tone</Label>
-                  <Select value={tone} onValueChange={setTone}>
-                    <SelectTrigger className="bg-background border-input">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="professional">Professional</SelectItem>
-                      <SelectItem value="playful">Playful</SelectItem>
-                      <SelectItem value="luxury">Luxury</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                <TabsContent value="text" className="space-y-4 mt-0">
+                  <div className="space-y-2">
+                    <Label htmlFor="caption" className="text-base font-semibold">Ad Caption</Label>
+                    <Textarea
+                      id="caption"
+                      placeholder="Paste your ad caption here..."
+                      value={caption}
+                      onChange={(e) => setCaption(e.target.value)}
+                      className="min-h-[200px] bg-background border-input resize-none"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="tone" className="text-base font-semibold">Tone</Label>
+                    <Select value={tone} onValueChange={setTone}>
+                      <SelectTrigger className="bg-background border-input">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="professional">Professional</SelectItem>
+                        <SelectItem value="playful">Playful</SelectItem>
+                        <SelectItem value="luxury">Luxury</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                <Button
-                  onClick={handleAnalyze}
-                  disabled={loading}
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                >
-                  {loading ? "Analyzing..." : "Analyze"}
-                </Button>
-              </TabsContent>
+                  <Button
+                    onClick={handleAnalyze}
+                    disabled={loading || !caption.trim()}
+                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 text-base shadow-lg shadow-primary/20"
+                  >
+                    {loading ? (
+                      <>
+                        <BarChart3 className="w-4 h-4 mr-2 animate-pulse" />
+                        Analyzing...
+                      </>
+                    ) : (
+                      <>
+                        <BarChart3 className="w-4 h-4 mr-2" />
+                        Analyze Ad
+                      </>
+                    )}
+                  </Button>
+                </TabsContent>
 
-              <TabsContent value="image" className="mt-6">
-                <div className="border-2 border-dashed border-border rounded-lg p-12 text-center">
-                  <p className="text-muted-foreground">
-                    Image upload coming soon
-                  </p>
-                </div>
-              </TabsContent>
-            </Tabs>
+                <TabsContent value="image" className="mt-0">
+                  <div className="border-2 border-dashed border-border rounded-lg p-12 text-center">
+                    <p className="text-muted-foreground">
+                      Image upload coming soon
+                    </p>
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </Card>
           </div>
 
           {/* Results Section */}
           <div className="space-y-6">
             {result ? (
               <>
+                {/* Score Meter */}
                 <Card className="p-6 bg-card border-border">
                   <div className="space-y-4">
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-heading text-lg text-foreground">Overall Effectiveness</h3>
-                        <span className="font-heading text-3xl text-primary">{result.score}</span>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="font-heading text-xl text-foreground">Overall Effectiveness</h3>
+                      <div className="flex items-baseline gap-2">
+                        <span className={`font-heading text-4xl ${getScoreColor(result.score)}`}>
+                          {result.score}
+                        </span>
+                        <span className="text-muted-foreground">/100</span>
                       </div>
-                      <Progress value={result.score} className="h-2" />
                     </div>
+                    <Progress 
+                      value={result.score} 
+                      className="h-3"
+                    />
+                    <p className="text-sm text-muted-foreground">
+                      {result.score >= 80 
+                        ? "Excellent! Your ad is highly effective." 
+                        : result.score >= 60 
+                        ? "Good, but there's room for improvement."
+                        : "Your ad needs significant improvements."}
+                    </p>
                   </div>
                 </Card>
 
+                {/* Feedback Points */}
                 <Card className="p-6 bg-card border-border">
-                  <h3 className="font-heading text-lg mb-4 text-foreground">Your Suggestions</h3>
-                  <ul className="space-y-3">
-                    {result.feedback.map((tip: string, index: number) => (
+                  <h3 className="font-heading text-xl mb-4 text-foreground">Key Suggestions</h3>
+                  <ul className="space-y-4">
+                    {result.feedback.slice(0, 3).map((tip: string, index: number) => (
                       <li key={index} className="flex gap-3">
-                        <span className="text-primary mt-1">•</span>
-                        <span className="text-muted-foreground">{tip}</span>
+                        <div className={`w-6 h-6 rounded-full ${getScoreBgColor(result.score)}/20 flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                          <span className={`text-xs font-semibold ${getScoreColor(result.score)}`}>
+                            {index + 1}
+                          </span>
+                        </div>
+                        <span className="text-muted-foreground leading-relaxed">{tip}</span>
                       </li>
                     ))}
                   </ul>
                 </Card>
 
+                {/* Improved Version */}
                 <Card className="p-6 bg-card border-border">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-heading text-lg text-foreground">Improved Version</h3>
+                    <h3 className="font-heading text-xl text-foreground">Improved Version</h3>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => copyToClipboard(result.improved_version)}
+                      className="h-8"
                     >
-                      <Copy className="w-4 h-4" />
+                      <Copy className="w-4 h-4 mr-2" />
+                      Copy
                     </Button>
                   </div>
-                  <p className="text-foreground leading-relaxed">
-                    {result.improved_version}
-                  </p>
+                  <div className="p-4 bg-background/50 rounded-lg border border-border/50">
+                    <p className="text-foreground leading-relaxed whitespace-pre-wrap">
+                      {result.improved_version}
+                    </p>
+                  </div>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setCaption(result.improved_version);
+                      setResult(null);
+                    }}
+                    className="w-full mt-4 border-border"
+                  >
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    Use This Version
+                  </Button>
                 </Card>
               </>
             ) : (
               <Card className="p-12 bg-card border-border text-center">
-                <p className="text-muted-foreground">
-                  Paste a caption or drop an image to start.
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <BarChart3 className="w-8 h-8 text-primary" />
+                </div>
+                <p className="text-muted-foreground mb-2">
+                  Your analysis results will appear here
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Paste your ad caption and click "Analyze Ad" to get started
                 </p>
               </Card>
             )}

@@ -61,6 +61,14 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Custom NovaScript color palette - Editorial
+        "deep-charcoal": "hsl(var(--deep-charcoal))",
+        "light-sand": "hsl(var(--light-sand))",
+        "soft-peach": "hsl(var(--soft-peach))",
+        "warm-beige": "hsl(var(--warm-beige))",
+        // Utility colors for easy access
+        "surface-elevated": "hsl(var(--surface-elevated))",
+        "text-premium": "hsl(var(--text-premium))",
       },
       borderRadius: {
         lg: "var(--radius)",
