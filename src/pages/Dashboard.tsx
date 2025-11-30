@@ -123,12 +123,12 @@ const Dashboard = () => {
       <Navigation />
 
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8 text-center">
+        <div className="mb-8 text-center animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border mb-4">
             <BarChart3 className="w-4 h-4 text-primary" />
             <span className="text-sm text-muted-foreground">AI Ad Analyzer</span>
           </div>
-          <h1 className="font-heading text-4xl sm:text-5xl mb-4 text-foreground">
+          <h1 className="font-heading text-4xl sm:text-5xl mb-4 text-foreground bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text">
             Analyze Your Ad
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -138,8 +138,8 @@ const Dashboard = () => {
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Input Section */}
-          <div className="space-y-6">
-            <Card className="p-6 bg-card border-border">
+          <div className="space-y-6 animate-slide-up" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
+            <Card className="p-6 bg-gradient-to-br from-card to-card/80 border-border hover:shadow-xl transition-all duration-500">
               <Tabs defaultValue="text" className="w-full">
                 <TabsList className="grid w-full grid-cols-2 mb-6">
                   <TabsTrigger value="text">Text Caption</TabsTrigger>
@@ -175,7 +175,7 @@ const Dashboard = () => {
                   <Button
                     onClick={handleAnalyze}
                     disabled={loading || !caption.trim()}
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 text-base shadow-lg shadow-primary/20"
+                    className="w-full bg-gradient-to-r from-primary to-soft-peach text-primary-foreground hover:opacity-90 h-12 text-base shadow-lg shadow-primary/30 transition-all duration-300"
                   >
                     {loading ? (
                       <>
@@ -203,16 +203,16 @@ const Dashboard = () => {
           </div>
 
           {/* Results Section */}
-          <div className="space-y-6">
+          <div className="space-y-6 animate-slide-up" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
             {result ? (
               <>
                 {/* Score Meter */}
-                <Card className="p-6 bg-card border-border">
+                <Card className="p-6 bg-gradient-to-br from-card to-card/80 border-border animate-scale-in hover:shadow-xl transition-all duration-500">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="font-heading text-xl text-foreground">Overall Effectiveness</h3>
                       <div className="flex items-baseline gap-2">
-                        <span className={`font-heading text-4xl ${getScoreColor(result.score)}`}>
+                        <span className={`font-heading text-4xl ${getScoreColor(result.score)} transition-colors duration-300`}>
                           {result.score}
                         </span>
                         <span className="text-muted-foreground">/100</span>
@@ -220,7 +220,7 @@ const Dashboard = () => {
                     </div>
                     <Progress 
                       value={result.score} 
-                      className="h-3"
+                      className="h-3 transition-all duration-500"
                     />
                     <p className="text-sm text-muted-foreground">
                       {result.score >= 80 
@@ -233,12 +233,12 @@ const Dashboard = () => {
                 </Card>
 
                 {/* Feedback Points */}
-                <Card className="p-6 bg-card border-border">
+                <Card className="p-6 bg-gradient-to-br from-card to-card/80 border-border animate-scale-in hover:shadow-xl transition-all duration-500" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
                   <h3 className="font-heading text-xl mb-4 text-foreground">Key Suggestions</h3>
                   <ul className="space-y-4">
                     {result.feedback.slice(0, 3).map((tip: string, index: number) => (
-                      <li key={index} className="flex gap-3">
-                        <div className={`w-6 h-6 rounded-full ${getScoreBgColor(result.score)}/20 flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                      <li key={index} className="flex gap-3 animate-fade-in" style={{ animationDelay: `${0.2 + index * 0.1}s`, animationFillMode: 'both' }}>
+                        <div className={`w-6 h-6 rounded-full ${getScoreBgColor(result.score)}/20 flex items-center justify-center flex-shrink-0 mt-0.5 transition-transform duration-300 hover:scale-110`}>
                           <span className={`text-xs font-semibold ${getScoreColor(result.score)}`}>
                             {index + 1}
                           </span>
@@ -250,20 +250,20 @@ const Dashboard = () => {
                 </Card>
 
                 {/* Improved Version */}
-                <Card className="p-6 bg-card border-border">
+                <Card className="p-6 bg-gradient-to-br from-card to-card/80 border-border animate-scale-in hover:shadow-xl transition-all duration-500" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-heading text-xl text-foreground">Improved Version</h3>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => copyToClipboard(result.improved_version)}
-                      className="h-8"
+                      className="h-8 transition-all duration-300"
                     >
                       <Copy className="w-4 h-4 mr-2" />
                       Copy
                     </Button>
                   </div>
-                  <div className="p-4 bg-background/50 rounded-lg border border-border/50">
+                  <div className="p-4 bg-gradient-to-br from-background/50 to-background/30 rounded-lg border border-border/50 transition-all duration-300">
                     <p className="text-foreground leading-relaxed whitespace-pre-wrap">
                       {result.improved_version}
                     </p>
@@ -274,7 +274,7 @@ const Dashboard = () => {
                       setCaption(result.improved_version);
                       setResult(null);
                     }}
-                    className="w-full mt-4 border-border"
+                    className="w-full mt-4 border-border transition-all duration-300"
                   >
                     <Sparkles className="w-4 h-4 mr-2" />
                     Use This Version
@@ -282,8 +282,8 @@ const Dashboard = () => {
                 </Card>
               </>
             ) : (
-              <Card className="p-12 bg-card border-border text-center">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <Card className="p-12 bg-gradient-to-br from-card to-card/80 border-border text-center transition-all duration-500 hover:shadow-xl">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/10 to-soft-peach/10 flex items-center justify-center mx-auto mb-4 animate-pulse">
                   <BarChart3 className="w-8 h-8 text-primary" />
                 </div>
                 <p className="text-muted-foreground mb-2">

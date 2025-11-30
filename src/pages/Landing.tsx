@@ -105,40 +105,40 @@ const Landing = () => {
       {/* Hero Section */}
       <section className="relative px-4 pt-20 pb-24 sm:px-6 lg:px-8 sm:pt-32 overflow-hidden">
         {/* Enhanced background with better contrast */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary/10" />
+        <div className="absolute inset-0 bg-[image:radial-gradient(circle_at_50%_120%,hsl(var(--primary)),transparent_50%),linear-gradient(135deg,hsl(var(--background)),hsl(var(--secondary)),hsl(var(--primary)))] animate-fade-in" />
         <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
     beforeImageSrc: '/ads/before-fitness.jpg',
         <div className="relative mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/90 backdrop-blur-sm border border-border/50 mb-8 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/90 backdrop-blur-sm border border-border/50 mb-8 shadow-sm animate-fade-in">
               <Sparkles className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium text-card-foreground">AI-Powered Ad Creation & Analysis</span>
             </div>
             
-            <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl mb-6 text-foreground leading-tight">
+            <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl mb-6 text-foreground leading-tight animate-slide-up">
               Create ads that
-              <span className="block text-primary">actually convert</span>
+              <span className="block text-primary bg-gradient-to-r from-primary via-soft-peach to-warm-beige bg-clip-text text-transparent">actually convert</span>
           </h1>
             
-            <p className="text-xl sm:text-2xl mb-4 text-foreground font-light max-w-2xl mx-auto">
+            <p className="text-xl sm:text-2xl mb-4 text-foreground font-light max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
               NovaScript helps you craft compelling ad copy and analyze performance with AI-powered insights.
             </p>
             
-            <p className="text-base sm:text-lg mb-8 text-foreground/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg mb-8 text-foreground/80 max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
               Whether you're creating new ads or optimizing existing ones, get actionable feedback to improve your messaging.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-scale-in" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
               <Button 
                 onClick={() => navigate('/dashboard')} 
-                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg h-auto shadow-lg shadow-primary/20 transition-all duration-200"
+                className="bg-gradient-to-r from-primary to-soft-peach text-primary-foreground hover:opacity-90 px-8 py-6 text-lg h-auto shadow-lg shadow-primary/30 transition-all duration-300"
               >
                 Try NovaScript
               </Button>
               <Button 
                 variant="outline"
                 onClick={() => navigate('/create')} 
-                className="border-border bg-card/50 backdrop-blur-sm px-8 py-6 text-lg h-auto hover:bg-card"
+                className="border-border bg-card/50 backdrop-blur-sm px-8 py-6 text-lg h-auto hover:bg-card transition-all duration-300"
               >
                 Create Ad
               </Button>
@@ -146,9 +146,9 @@ const Landing = () => {
           </div>
 
           {/* Interactive Visual Ad Examples */}
-          <div className="mt-20">
+          <div className="mt-20 animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'both' }}>
             <div className="text-center mb-12">
-              <h2 className="font-heading text-3xl sm:text-4xl mb-4 text-foreground font-bold">
+              <h2 className="font-heading text-3xl sm:text-4xl mb-4 text-foreground font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text">
                 See AI in Action
               </h2>
               <p className="text-lg text-foreground/90 max-w-2xl mx-auto">
@@ -158,13 +158,13 @@ const Landing = () => {
 
             <div className="grid lg:grid-cols-2 gap-8 mb-8">
               {/* Before - Social Media Ad Mockup */}
-              <div key={`before-${activeExample}`} className="transition-all duration-700">
+              <div key={`before-${activeExample}`} className="transition-all duration-700 animate-fade-in">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
                   <span className="text-sm font-bold text-foreground uppercase tracking-wide">Before Analysis</span>
                   <div className="flex-1 h-px bg-gradient-to-r from-red-500/50 to-transparent" />
                 </div>
-                <Card className="p-0 bg-white border-2 border-red-500/20 shadow-2xl overflow-hidden max-w-sm mx-auto">
+                <Card className="p-0 bg-white border-2 border-red-500/20 shadow-2xl overflow-hidden max-w-sm mx-auto hover:shadow-red-500/20 hover:scale-[1.02] transition-all duration-300">
                   {/* Instagram Header */}
                   <div className="p-3 bg-white border-b border-gray-200 flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -218,16 +218,16 @@ const Landing = () => {
               </div>
 
               {/* After - Enhanced Social Media Ad Mockup */}
-              <div key={`after-${activeExample}`} className="transition-all duration-700">
+              <div key={`after-${activeExample}`} className="transition-all duration-700 animate-fade-in">
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500 shadow-lg shadow-green-500/50" />
                   <span className="text-sm font-bold text-foreground uppercase tracking-wide">After NovaScript</span>
                   <div className="flex-1 h-px bg-gradient-to-r from-green-500/50 to-transparent" />
-                  <Zap className="w-4 h-4 text-primary" />
+                  <Zap className="w-4 h-4 text-primary animate-pulse" />
                 </div>
-                <Card className="p-0 bg-white border-2 border-primary/30 shadow-2xl overflow-hidden relative max-w-sm mx-auto">
+                <Card className="p-0 bg-white border-2 border-primary/30 shadow-2xl overflow-hidden relative max-w-sm mx-auto hover:shadow-primary/40 hover:scale-[1.02] transition-all duration-300">
                   {/* Glow Effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${exampleAds[activeExample].color} opacity-20 blur-3xl -z-10`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${exampleAds[activeExample].color} opacity-20 blur-3xl -z-10 transition-opacity duration-700`} />
                   
                   {/* Instagram Header */}
                   <div className="p-3 bg-white border-b border-primary/20 flex items-center justify-between relative z-10">
@@ -363,23 +363,23 @@ const Landing = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="px-4 py-12 sm:px-6 lg:px-8 bg-card/50 border-y border-border/50">
+      <section className="px-4 py-12 sm:px-6 lg:px-8 bg-gradient-to-r from-card/30 via-card/50 to-card/30 border-y border-border/50">
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="font-heading text-3xl sm:text-4xl mb-2 text-primary">10K+</div>
+            <div className="animate-fade-in hover:scale-110 transition-transform duration-300" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
+              <div className="font-heading text-3xl sm:text-4xl mb-2 text-primary bg-gradient-to-br from-primary to-soft-peach bg-clip-text text-transparent">10K+</div>
               <div className="text-sm text-muted-foreground">Ads Analyzed</div>
               </div>
-            <div>
-              <div className="font-heading text-3xl sm:text-4xl mb-2 text-primary">95%</div>
+            <div className="animate-fade-in hover:scale-110 transition-transform duration-300" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
+              <div className="font-heading text-3xl sm:text-4xl mb-2 text-primary bg-gradient-to-br from-primary to-soft-peach bg-clip-text text-transparent">95%</div>
               <div className="text-sm text-muted-foreground">Improvement Rate</div>
             </div>
-            <div>
-              <div className="font-heading text-3xl sm:text-4xl mb-2 text-primary">2.5s</div>
+            <div className="animate-fade-in hover:scale-110 transition-transform duration-300" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
+              <div className="font-heading text-3xl sm:text-4xl mb-2 text-primary bg-gradient-to-br from-primary to-soft-peach bg-clip-text text-transparent">2.5s</div>
               <div className="text-sm text-muted-foreground">Avg. Analysis Time</div>
             </div>
-            <div>
-              <div className="font-heading text-3xl sm:text-4xl mb-2 text-primary">4.9/5</div>
+            <div className="animate-fade-in hover:scale-110 transition-transform duration-300" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
+              <div className="font-heading text-3xl sm:text-4xl mb-2 text-primary bg-gradient-to-br from-primary to-soft-peach bg-clip-text text-transparent">4.9/5</div>
               <div className="text-sm text-muted-foreground">User Rating</div>
             </div>
           </div>
@@ -387,19 +387,19 @@ const Landing = () => {
       </section>
 
       {/* Main Features */}
-      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-card/40 backdrop-blur-sm">
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-gradient-to-b from-card/40 to-background backdrop-blur-sm">
         <div className="mx-auto max-w-6xl">
-          <h2 className="font-heading text-3xl sm:text-4xl text-center mb-4 text-foreground font-bold">
+          <h2 className="font-heading text-3xl sm:text-4xl text-center mb-4 text-foreground font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text animate-fade-in">
             Two powerful tools in one
           </h2>
-          <p className="text-center text-foreground/90 mb-12 max-w-2xl mx-auto text-lg">
+          <p className="text-center text-foreground/90 mb-12 max-w-2xl mx-auto text-lg animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
             Create new ad copy or analyze existing ads to improve performance
           </p>
           
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             {/* Create Ad Feature */}
-            <Card className="p-8 bg-card border-border hover:shadow-xl transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+            <Card className="p-8 bg-gradient-to-br from-card to-card/80 border-border hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group hover:scale-[1.02] animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-soft-peach/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Wand2 className="w-7 h-7 text-primary" />
               </div>
               <h3 className="font-heading text-2xl mb-3 text-card-foreground font-bold">Create Ad</h3>
@@ -408,15 +408,15 @@ const Landing = () => {
               </p>
               <Button
                 onClick={() => navigate('/create')}
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                className="w-full bg-gradient-to-r from-primary to-soft-peach text-primary-foreground hover:opacity-90"
               >
                 Start Creating
               </Button>
             </Card>
 
             {/* Analyze Ad Feature */}
-            <Card className="p-8 bg-card border-border hover:shadow-xl transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-6 group-hover:bg-secondary/20 transition-colors">
+            <Card className="p-8 bg-gradient-to-br from-card to-card/80 border-border hover:shadow-2xl hover:shadow-secondary/10 transition-all duration-500 group hover:scale-[1.02] animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-secondary/20 to-warm-beige/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <BarChart3 className="w-7 h-7 text-secondary" />
             </div>
               <h3 className="font-heading text-2xl mb-3 text-card-foreground font-bold">Analyze Ad</h3>
@@ -425,7 +425,7 @@ const Landing = () => {
               </p>
               <Button
                 onClick={() => navigate('/dashboard')}
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                className="w-full bg-gradient-to-r from-primary to-soft-peach text-primary-foreground hover:opacity-90"
               >
                 Analyze Now
               </Button>
@@ -433,8 +433,8 @@ const Landing = () => {
           </div>
 
           {/* Preview Card */}
-          <Card className="p-8 border-2 border-primary/30 shadow-2xl relative overflow-hidden bg-card backdrop-blur-sm">
-            <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full -mr-20 -mt-20 blur-3xl" />
+          <Card className="p-8 border-2 border-primary/30 shadow-2xl relative overflow-hidden bg-gradient-to-br from-card to-card/80 backdrop-blur-sm hover:shadow-primary/20 transition-all duration-500 animate-scale-in" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
+            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-primary/10 to-soft-peach/10 rounded-full -mr-20 -mt-20 blur-3xl animate-pulse" />
             <div className="relative">
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 ring-2 ring-primary/30">
